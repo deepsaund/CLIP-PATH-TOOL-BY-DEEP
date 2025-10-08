@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clip Path GUI Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="app-header">
+        <h1>Clip Path GUI</h1>
+        <div class="controls-row">
+            <label>Mode
+                <select id="modeSelect">
+                    <option value="polygon" selected>Polygon</option>
+                    <option value="curve">Curve (path)</option>
+                </select>
+            </label>
+            <label>Shape
+                <select id="shapeSelect">
+                    <option value="outer" selected>Outer Only</option>
+                    <option value="outer+inner">Outer + Inner (hole)</option>
+                </select>
+            </label>
+            <label>Width <input id="boxWidth" type="number" value="400" min="50" max="1200"></label>
+            <label>Height <input id="boxHeight" type="number" value="300" min="50" max="1200"></label>
+            <label>Zoom <input id="zoomRange" type="range" min="25" max="400" value="100"></label>
+            <button id="resetBtn">Reset</button>
+            <button id="fitBtn">Fit</button>
+            <button id="centerBtn">Center</button>
+            <label><input id="gridCheckbox" type="checkbox" checked> Grid</label>
+            <label>Grid Size <input id="gridSizeInput" type="number" value="20" min="4" max="200"></label>
+            <button id="undoBtn">Undo</button>
+            <button id="redoBtn">Redo</button>
+        </div>
+    </header>
+
+    <main class="layout">
+        <section class="canvas-panel">
+            <div id="stageWrapper">
+                <div id="zoomContainer">
+                    <div id="targetBox" class="grid">
+                        <div id="preview"></div>
+                        <svg id="overlay" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"></svg>
+                    </div>
+                </div>
+            </div>
+            <div class="hint">Click to add points. Drag to move. Delete key to remove selected.</div>
+        </section>
+        <aside class="side-panel">
+            <div class="group">
+                <div class="row">
+                    <button id="addOuterBtn">Add Outer Point</button>
+                    <button id="addInnerBtn">Add Inner Point</button>
+                    <button id="deletePointBtn">Delete Point</button>
+                </div>
+                <div class="row">
+                    <label><input id="snapCheckbox" type="checkbox"> Snap to grid</label>
+                </div>
+            </div>
+            <div class="group">
+                <h3>Curve</h3>
+                <div class="row">
+                    <span id="curveEdgeLabel">Select two adjacent points</span>
+                </div>
+                <div class="row">
+                    <label>Curvature
+                        <input id="curveSlider" type="range" min="-200" max="200" value="0">
+                    </label>
+                    <span id="curveValue">0</span>
+                </div>
+                <div class="row" style="font-size:12px;color:#94a3b8">Ctrl+click to multi-select two points.</div>
+            </div>
+            <div class="group">
+                <h3>CSS Output</h3>
+                <textarea id="cssOutput" rows="6" readonly></textarea>
+                <button id="copyBtn">Copy CSS</button>
+            </div>
+        </aside>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
+
