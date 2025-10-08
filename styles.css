@@ -75,7 +75,14 @@ button:hover{ border-color:#334155 }
     z-index:0;
 }
 
-#overlay{ z-index:1 }
+#gridLayer{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+}
+
+#overlay{ z-index:2 }
 
 .side-panel{ border-left:1px solid #1f2937; padding:16px; background:var(--panel); overflow:auto }
 .group{ border:1px solid #1f2937; border-radius:8px; padding:12px; margin-bottom:12px; background:#0b1220 }

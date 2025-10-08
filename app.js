@@ -2,6 +2,7 @@
 	const overlay = document.getElementById('overlay');
 	const targetBox = document.getElementById('targetBox');
 	const preview = document.getElementById('preview');
+	const gridLayer = document.getElementById('gridLayer');
 	const zoomContainer = document.getElementById('zoomContainer');
 	const stageWrapper = document.getElementById('stageWrapper');
 	const modeSelect = document.getElementById('modeSelect');
@@ -105,16 +106,20 @@
 	heightInput.addEventListener('change', setBoxSize);
 	zoomRange.addEventListener('input', setZoomFromRange);
 	gridCheckbox.addEventListener('change', ()=>{
-		if(gridCheckbox.checked){ targetBox.classList.add('grid'); }
-		else { targetBox.classList.remove('grid'); }
+		if(gridCheckbox.checked){ gridLayer.classList.add('grid'); }
+		else { gridLayer.classList.remove('grid'); }
 	});
 	gridSizeInput.addEventListener('change', ()=>{
 		const g = Math.max(4, Math.min(200, +gridSizeInput.value||20));
 		gridSizeInput.value = String(g);
-		targetBox.style.setProperty('--grid', g+'px');
-		targetBox.style.setProperty('--grid-major', (g*5)+'px');
+		gridLayer.style.setProperty('--grid', g+'px');
+		gridLayer.style.setProperty('--grid-major', (g*5)+'px');
 		render();
 	});
+
+	// initialize grid
+	if(gridCheckbox.checked){ gridLayer.classList.add('grid'); }
+	gridSizeInput.dispatchEvent(new Event('change'));
 
 	fitBtn.addEventListener('click', ()=>{
 		const boxW = targetBox.clientWidth;
